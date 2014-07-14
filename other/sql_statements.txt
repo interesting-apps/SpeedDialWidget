@@ -1,0 +1,8 @@
+Create Contact Table:
+
+CREATE TABLE speed_dial_contact (
+    "_id" INTEGER primary key autoincrement ,
+    "NAME" TEXT,
+    "PHONE_NUMBER" TEXT unique,
+    "SPEED_DIAL_NUMBER" INTEGER unique
+)

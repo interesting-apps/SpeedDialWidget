@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/widget_speed_dial_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:background="@drawable/widget_speed_dial_text_image"
+        android:gravity="left"
+        android:maxLength="15"
+        android:maxLines="1"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/speed_dial_number_hash_string"
+        android:textColor="@color/Black"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:id="@+id/widget_layout_numpad_row_1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:orientation="horizontal"
+        android:paddingTop="6dp" >
+
+        <ImageView
+            android:id="@+id/widget_numpad_1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_1_string"
+            android:src="@drawable/numpad_1" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_2"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_2_string"
+            android:src="@drawable/numpad_2" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_3"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_3_string"
+            android:src="@drawable/numpad_3" />
+
+        <ImageView
+            android:id="@+id/widget_make_call_image"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/make_call_string"
+            android:src="@drawable/make_call_image_small" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_layout_numpad_row_2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:orientation="horizontal"
+        android:paddingTop="6dp" >
+
+        <ImageView
+            android:id="@+id/widget_numpad_4"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_4_string"
+            android:src="@drawable/numpad_4" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_5"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_5_string"
+            android:src="@drawable/numpad_5" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_6"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_6_string"
+            android:src="@drawable/numpad_6" />
+
+        <ImageView
+            android:id="@+id/widget_show_contacts_activity"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/show_contacts_string"
+            android:src="@drawable/widget_show_contacts" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_layout_numpad_row_3"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:orientation="horizontal"
+        android:paddingTop="6dp" >
+
+        <ImageView
+            android:id="@+id/widget_numpad_7"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_7_string"
+            android:src="@drawable/numpad_7" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_8"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_8_string"
+            android:src="@drawable/numpad_8" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_9"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_9_string"
+            android:src="@drawable/numpad_9" />
+
+        <ImageView
+            android:id="@+id/widget_call_log_activity"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/call_log_string"
+            android:src="@drawable/widget_call_logs" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_layout_numpad_row_4"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:orientation="horizontal"
+        android:paddingTop="6dp" >
+
+        <ImageView
+            android:id="@+id/widget_numpad_clear"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_clear_string"
+            android:src="@drawable/numpad_clear" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_0"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_0_string"
+            android:src="@drawable/numpad_0" />
+
+        <ImageView
+            android:id="@+id/widget_numpad_backspace"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/widget_numpad_backspace_string"
+            android:src="@drawable/numpad_backspace" />
+
+        <ImageView
+            android:id="@+id/widget_speed_dial_activity"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/widget_speed_dial_icon" />
+    </LinearLayout>
+
+</LinearLayout>

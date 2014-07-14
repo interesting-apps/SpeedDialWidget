@@ -1,0 +1,7 @@
+SpeedDial Widget is an app that brings calling right at your finger tips i.e., on your home screen. So, there's no need to open the phone/contacts app and select the contact(out of an enormous list of contacts) you have to call. All you have to do is just enter an easy to remember shortcut number for each contact you make frequent calls to and dial. Yeah, thats right! Just add the widget on your home screen, assign easy to remember speed dial numbers for the contacts and start dialing.
+
+With SpeedDial Widget you can:
+* Assign easy to remember shortcut/speed dial numbers for contacts
+* Enter these shortcut numbers on the home screen only, to make calls
+* Open Contacts/Logs from the same place without overloading your home screen with a separate icon for each purpose
+* Open the app to manage the stored speed dial numbers.

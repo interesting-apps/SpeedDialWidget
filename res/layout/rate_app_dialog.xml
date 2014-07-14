@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/rateAppDialogMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_rate_app_dialog"
+        android:textColor="@color/White"
+        android:paddingLeft="2dp" />
+    
+    <TextView
+        android:id="@+id/thanksForYourSupportMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_thanks_for_your_support"
+        android:textColor="@color/White"
+        android:padding="2dp" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/rateAppButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/rate_app_button_string"
+            android:padding="1dp" />
+
+        <Button
+            android:id="@+id/rateAppLaterButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/rate_app_later_button_string"
+            android:padding="1dp" />
+
+        <Button
+            android:id="@+id/neverShowAgainButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/never_show_again_button_string"
+            android:padding="1dp" />
+    </LinearLayout>
+
+</LinearLayout>

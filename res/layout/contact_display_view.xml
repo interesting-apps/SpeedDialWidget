@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/speed_dial_background"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp" >
+
+    <LinearLayout
+        android:id="@+id/image_and_edit_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <EditText
+            android:id="@+id/dialNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/speed_dial_text_image"
+            android:hint="@string/dial_number_hint_string"
+            android:inputType="number"
+            android:maxLength="15"
+            android:textColor="@color/Brown"
+            android:textColorHint="@color/Brown"
+            android:textSize="15dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/makeCallImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/make_call_string"
+            android:paddingLeft="5dp"
+            android:src="@drawable/make_call_selector" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/emptySpeedDialNumberList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_and_edit_text_layout"
+        android:paddingTop="5dp"
+        android:text="@string/empty_speed_dial_number_list"
+        android:textColor="@color/WhiteSmoke" />
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="a150ee6f61bf311"
+        ads:refreshInterval="60" />
+
+    <ListView
+        android:id="@+id/contactList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/adView"
+        android:layout_below="@id/emptySpeedDialNumberList"
+        android:divider="#00000000"
+        android:fadingEdge="none"
+        android:requiresFadingEdge="vertical" />
+
+</RelativeLayout>

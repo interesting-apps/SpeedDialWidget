@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:background="@drawable/list_view_states_color_selector" >
+
+    <TextView
+        android:id="@+id/contact_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/speedDialNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:textSize="18dp" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp" >
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/contactName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/WhiteSmoke"
+                    android:textSize="14dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Gray"
+                    android:textSize="12dp" />
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+
+    <LinearLayout
+        android:id="@+id/row_divider_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/listViewRowDdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/list_view_row_divider_description"
+            android:src="@drawable/list_view_row_divider_line" />
+
+        <!--  <ImageView
+            android:id="@+id/row_divider_invisible_part"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.20"
+            android:contentDescription="@string/list_view_invisible_row_divider_description"
+            android:background="@android:color/transparent" /> -->
+    </LinearLayout>
+
+</TableLayout>

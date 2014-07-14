@@ -1,0 +1,348 @@
+package com.apps.interestingapps.speeddial.common;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.apps.interestingapps.speeddial.SpeedDialContact;
+
+/**
+ * Class to handle database creation and updates
+ */
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+	private static DatabaseHelper databaseHelper;
+	private Context context;
+	private SQLiteDatabase database;
+	private String[] allColumns = { SpeedDialConstants.ID_COLUMN,
+			SpeedDialConstants.NAME_COLUMN,
+			SpeedDialConstants.PHONE_NUMBER_COLUMN,
+			SpeedDialConstants.SPEED_DIAL_NUMBER_COLUMN };
+
+	private DatabaseHelper(Context context) {
+		super(context, SpeedDialConstants.DATABASE_NAME, null,
+				SpeedDialConstants.DATABASE_VERSION);
+		this.context = context;
+	}
+
+	public static DatabaseHelper getInstance(Context context) {
+		if (context == null) {
+			throw new IllegalArgumentException("Context is null");
+		}
+		if (databaseHelper == null) {
+			databaseHelper = new DatabaseHelper(context);
+		}
+		return databaseHelper;
+	}
+
+	/**
+	 * Method called when database is created
+	 */
+	@Override
+	public void onCreate(SQLiteDatabase database) {
+
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+	}
+
+	/**
+	 * Method to create a database. The database is copied from assests folder if
+	 * it doesn't exists already
+	 *
+	 * @throws IOException
+	 */
+	public void createDataBase() throws IOException {
+		boolean dbExist = checkDataBase();
+		SQLiteDatabase tempDatabase = null;
+		if (!dbExist) {
+			try {
+				Log.i(context.getClass().getName(), "Database file does not exists");
+				tempDatabase = getReadableDatabase();
+				copyDataBase();
+				tempDatabase.close();
+			} catch (IOException e) {
+				if (tempDatabase != null) {
+					tempDatabase.close();
+				}
+				throw new Error("Error copying database", e);
+			}
+		}
+	}
+
+	/**
+	 * Checks if database file exists, and it can be opened
+	 *
+	 * @return true if the database can be opened
+	 */
+	private boolean checkDataBase() {
+		SQLiteDatabase checkDB = null;
+		boolean dbExist = true;
+		try {
+			String myPath = SpeedDialConstants.DB_PATH
+					+ SpeedDialConstants.DATABASE_NAME;
+			checkDB = SQLiteDatabase.openDatabase(myPath, null,
+					SQLiteDatabase.OPEN_READONLY);
+		} catch (Exception e) {
+			// Some error occurred. Override the existing database to avoid errors
+			dbExist = false;
+		}
+		if (checkDB != null) {
+			String query = "SELECT * FROM SQLITE_MASTER";
+			dbExist = false;
+			try {
+				Cursor cursor = checkDB.rawQuery(query, null);
+				while (cursor.moveToNext()) {
+					String tableName = cursor.getString(cursor
+							.getColumnIndex("name"));
+					if (tableName.equals(SpeedDialConstants.CONTACT_TABLE)) {
+						dbExist = true;
+						break;
+					}
+				}
+				cursor.close();
+				// if(deleteFile) {
+				// dbExist = false;
+				// deleteDatabaseFile();
+				// }
+				checkDB.close();
+			} catch (Exception e) {
+				if (checkDB != null) {
+					checkDB.close();
+				}
+			}
+		} else {
+			dbExist = false;
+		}
+		Log.i(context.getClass().getName(), "DB exists: " + dbExist);
+		return dbExist;
+	}
+
+	/**
+	 * Copy the database file from assests to database folder of the app
+	 *
+	 * @throws IOException
+	 */
+	private void copyDataBase() throws IOException {
+		// Open your local db as the input stream
+		InputStream myInput = context.getAssets().open(
+				SpeedDialConstants.DATABASE_NAME);
+		// Path to the just created empty db
+		String outFileName = SpeedDialConstants.DB_PATH
+				+ SpeedDialConstants.DATABASE_NAME;
+		;
+		// Open the empty db as the output stream
+		OutputStream myOutput = new FileOutputStream(outFileName);
+		// transfer bytes from the inputfile to the outputfile
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = myInput.read(buffer)) > 0) {
+			myOutput.write(buffer, 0, length);
+		}
+		// Close the streams
+		myOutput.flush();
+		myOutput.close();
+		myInput.close();
+		Log.i(context.getClass().getName(), "Successfully copied the file");
+	}
+
+	/**
+	 * Open a connection to database in read/write mode
+	 *
+	 * @throws SQLException
+	 */
+	public void openDatabase() throws SQLException {
+		// Open the database
+		String myPath = SpeedDialConstants.DB_PATH
+				+ SpeedDialConstants.DATABASE_NAME;
+		database = SQLiteDatabase.openDatabase(myPath, null,
+				SQLiteDatabase.OPEN_READWRITE);
+
+	}
+
+	/**
+	 * Retrieve all the values present in the database
+	 *
+	 * @return All values in database
+	 */
+	public List<SpeedDialContact> getAllValues() {
+		List<SpeedDialContact> allValues = new ArrayList<SpeedDialContact>();
+		Cursor allValuesCursor = database.query(SpeedDialConstants.CONTACT_TABLE,
+				allColumns, null, null, null, null, null);
+		while (allValuesCursor.moveToNext()) {
+			allValues.add(SpeedDialContact.newInstance(allValuesCursor));
+		}
+		allValuesCursor.close();
+		return allValues;
+	}
+
+	/**
+	 * Add the record with given values to the database
+	 *
+	 * @param name
+	 * @param phoneNumber
+	 * @param speedDialNumber
+	 * @return The SpeedDialContact object created with those values
+	 */
+	public SpeedDialContact addRecord(String name,
+			String phoneNumber,
+			int speedDialNumber) {
+		ContentValues values = new ContentValues();
+		values.put(SpeedDialConstants.NAME_COLUMN, name);
+		values.put(SpeedDialConstants.PHONE_NUMBER_COLUMN, phoneNumber);
+		values.put(SpeedDialConstants.SPEED_DIAL_NUMBER_COLUMN, speedDialNumber);
+		long insertId = database.insert(SpeedDialConstants.CONTACT_TABLE, null,
+				values);
+		Log.i("DatabaseHelper", "Successfully created a new record with id "
+				+ insertId);
+		if (insertId < 0) {
+			return null;
+		}
+		SpeedDialContact newContact = SpeedDialContact.newInstance(insertId,
+				name, phoneNumber, speedDialNumber);
+		return newContact;
+	}
+
+	/**
+	 * Gets the record from database with having the given ID. Returns null if no
+	 * data with given ID is found
+	 *
+	 * @param _id
+	 * @return The SpeedDialContact object with the values from the database with
+	 *         row having ID = _id
+	 */
+	public SpeedDialContact getRecord(long _id) {
+		SpeedDialContact retrievedContact = null;
+		Cursor recordCursor = database.query(SpeedDialConstants.CONTACT_TABLE,
+				allColumns, SpeedDialConstants.ID_COLUMN + "= ?",
+				new String[] { Long.toString(_id) }, null, null, null);
+		if (recordCursor.moveToFirst()) {
+			retrievedContact = SpeedDialContact.newInstance(recordCursor);
+		}
+		recordCursor.close();
+		return retrievedContact;
+	}
+
+	/**
+	 * Method to delete a record having the given ID from database
+	 *
+	 * @param _id
+	 * @return True if record was deleted. False otherwise
+	 */
+	public boolean deleteRecord(long _id) {
+		int numOfRowsAffected = database.delete(SpeedDialConstants.CONTACT_TABLE,
+				SpeedDialConstants.ID_COLUMN + "=?", new String[] { Long
+						.toString(_id) });
+		return numOfRowsAffected > 0;
+	}
+
+	/**
+	 * Gets the SpeedDialContact for the given speed dial number, if that exists
+	 * in the database
+	 *
+	 * @param speedDialNumber
+	 * @return SpeedDialContact if it exists in the database, null otherwise
+	 */
+	public SpeedDialContact getRecordForSpeedDialNumber(long speedDialNumber) {
+		SpeedDialContact retrievedContact = null;
+		Cursor recordCursor = database.query(SpeedDialConstants.CONTACT_TABLE,
+				allColumns, SpeedDialConstants.SPEED_DIAL_NUMBER_COLUMN + "= ?",
+				new String[] { Long.toString(speedDialNumber) }, null, null, null);
+		if (recordCursor.moveToFirst()) {
+			retrievedContact = SpeedDialContact.newInstance(recordCursor);
+		}
+		recordCursor.close();
+		return retrievedContact;
+	}
+
+	/**
+	 * Gets the SpeedDialContact for the given phone number, if that exists in
+	 * the database
+	 *
+	 * @param phoneNumber
+	 * @return SpeedDialContact if it exists in the database, null otherwise
+	 */
+	public SpeedDialContact getRecordForPhoneNumber(String phoneNumber) {
+		SpeedDialContact retrievedContact = null;
+		Cursor recordCursor = database.query(SpeedDialConstants.CONTACT_TABLE,
+				allColumns, SpeedDialConstants.PHONE_NUMBER_COLUMN + "= ?",
+				new String[] { phoneNumber }, null, null, null);
+		if (recordCursor.moveToFirst()) {
+			retrievedContact = SpeedDialContact.newInstance(recordCursor);
+
+		}
+		recordCursor.close();
+		return retrievedContact;
+	}
+
+	/**
+	 * Method to update the oldSpeedDialNumber to newSpeedDialNumber
+	 *
+	 * @param oldSpeedDialNumber
+	 * @param newSpeedDialNumber
+	 * @return true if the update was successful
+	 */
+	public boolean updateSpeedDialNumber(int oldSpeedDialNumber,
+			int newSpeedDialNumber) {
+		ContentValues values = new ContentValues();
+		values.put(SpeedDialConstants.SPEED_DIAL_NUMBER_COLUMN, Integer
+				.toString(newSpeedDialNumber));
+		int rowsAffected = database.update(SpeedDialConstants.CONTACT_TABLE,
+				values, SpeedDialConstants.SPEED_DIAL_NUMBER_COLUMN + "=?",
+				new String[] { Integer.toString(oldSpeedDialNumber) });
+		Log.d("DatabaseHelper", "Total rows affected:" + rowsAffected);
+		return rowsAffected == 1;
+	}
+
+	/**
+	 * Method to update the oldPhoneNumber to newPhoneNumber
+	 *
+	 * @param oldPhoneNumber
+	 * @param newPhoneNumber
+	 * @param contactName
+	 * @return true if the update was successful
+	 */
+	public boolean updatePhoneNumber(String oldPhoneNumber,
+			String newPhoneNumber,
+			String contactName) {
+		ContentValues values = new ContentValues();
+		values.put(SpeedDialConstants.PHONE_NUMBER_COLUMN, newPhoneNumber);
+		values.put(SpeedDialConstants.NAME_COLUMN, contactName);
+		int rowsAffected = database.update(SpeedDialConstants.CONTACT_TABLE,
+				values, SpeedDialConstants.PHONE_NUMBER_COLUMN + "=?",
+				new String[] { oldPhoneNumber });
+		Log.d("DatabaseHelper", "Total rows affected:" + rowsAffected);
+		return rowsAffected == 1;
+	}
+
+	private void deleteDatabaseFile() {
+		String dbPath = SpeedDialConstants.DB_PATH
+				+ SpeedDialConstants.DATABASE_NAME;
+		File dbFile = new File(dbPath);
+		if (dbFile.exists()) {
+			Log.i("DatabaseHelper", "Database file exists");
+			dbFile.delete();
+		}
+	}
+
+	public void closeDatabase() {
+		if (database != null) {
+			database.close();
+		}
+	}
+}

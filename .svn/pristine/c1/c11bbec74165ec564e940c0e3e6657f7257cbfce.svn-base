@@ -1,0 +1,92 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">SpeedDial</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_speed_dial">Speed Dial</string>
+    <string name="cancel_button_string">Cancel</string>
+    <string name="add_contact_string">Add Contact</string>
+    <string name="delete">Delete</string>
+    <string name="hint_speed_dial_number_dialog">Speed Dial Number</string>
+    <string name="title_pick_phone_number">Pick a phone number</string>
+    <string name="title_select_speed_dial_number">Assign Speed Dial Number</string>
+    <string name="ok_button_string">OK</string>
+    <string name="edit">Edit</string>
+    <string name="edit_speed_dial_number_string">Edit Speed Dial Number</string>
+    <string name="edit_phone_number_string">Edit Associated Phone Number</string>
+    <string name="title_edit_contact">Select operation</string>
+    <string name="dial_number_hint_string">Speed Dial Number</string>
+    <string name="dial_number_button_string">Dial</string>
+    <string name="speed_dial_number_string">Speed Dial Number</string>
+    <string name="doesnt_exist_string">doesn\'t exist. What would you like to do?</string>
+    <string name="contact_name_text_view_name">Name: </string>
+    <string name="phone_number_text_view_name">Phone Number: </string>
+    <string name="empty_speed_dial_number_list">No Speed Dial Numbers assigned.\nPress "Menu" to add contacts.</string>
+    <string name="title_override_dialog">Override?</string>
+    <string name="message_override_speed_dial_number_dialog">This Speed Dial Number is already associated with a phone number. Do you want to override the entry?</string>
+    <string name="message_override_phone_number_dialog">This Phone Number is already associated with a Speed Dial Number. Do you want to override the entry?</string>
+    <string name="message_override_speed_dial_and_phone_number_dialog">Both the Speed Dial Number and Phone Number are already present. Do you want to override the entries?</string>
+    <string name="yes_button_string">Yes</string>
+    <string name="no_button_string">No</string>
+    <string name="make_call_string">Dial</string>
+    <string name="list_view_row_divider_description">Row divider</string>
+    <string name="list_view_invisible_row_divider_description">Invisible</string>
+    <string name="save_button_string">Save</string>
+    <string name="table_and_image_description">Invisible Table image</string>
+    <string name="title_rate_app_dialog">Please rate Speed Dial!</string>
+    <string name="message_rate_app_dialog">Please take a moment to rate Speed Dial, to help us improve.</string>
+    <string name="message_thanks_for_your_support">Thanks for your support!</string>
+    <string name="rate_app_button_string">Rate it!</string>
+    <string name="rate_app_later_button_string">Ask me Later!</string>
+    <string name="never_show_again_button_string">Never ask again!</string>
+    <string name="never_show_again_preference_string">never_show_again</string>
+    <string name="launch_count_preference_string">launch_count</string>
+    <string name="speed_dial_widget_label">Speed Dial Widget</string>
+    <string name="widget_image_text">Speed Dial Widget Image</string>
+    <string name="widget_numpad_1_string">1</string>
+    <string name="widget_numpad_2_string">2</string>
+    <string name="widget_numpad_3_string">3</string>
+    <string name="widget_numpad_4_string">4</string>
+    <string name="widget_numpad_5_string">5</string>
+    <string name="widget_numpad_6_string">6</string>
+    <string name="widget_numpad_7_string">7</string>
+    <string name="widget_numpad_8_string">8</string>
+    <string name="widget_numpad_9_string">9</string>
+    <string name="widget_numpad_0_string">0</string>
+    <string name="widget_text_box_activity">Widget Text Box Activity</string>
+    <string name="widget_intent_filter_action_text_box">com.apps.interestingapps.speeddial.SET_TEXT</string>
+    <string name="speed_dial_intent_filter_action">com.apps.interestingapps.speeddial.SAVE_CONTACT</string>
+    <string name="widget_intent_filter_category">android.intent.category.DEFAULT</string>
+    <string name="widget_numpad_clear_string">Clear</string>
+    <string name="widget_numpad_backspace_string">Backspace</string>
+    <string name="speed_dial_number_hash_string">Speed Dial#</string>
+    <string name="widget_make_call_activity">Widget Make Call Activity</string>
+    <string name="widget_intent_filter_action_make_call">com.apps.interestingapps.speeddial.MAKE_CALL</string>
+    <string name="call_log_string">Call Logs</string>
+    <string name="show_contacts_string">Contacts</string>
+
+    <string-array name="edit_menu_items">
+        <item>@string/edit_speed_dial_number_string</item>
+        <item>@string/edit_phone_number_string</item>
+    </string-array>
+    <string-array name="numpad_numbers">
+        <item>@string/widget_numpad_1_string</item>
+        <item>@string/widget_numpad_2_string</item>
+        <item>@string/widget_numpad_3_string</item>
+        <item>@string/widget_numpad_4_string</item>
+        <item>@string/widget_numpad_5_string</item>
+        <item>@string/widget_numpad_6_string</item>
+        <item>@string/widget_numpad_7_string</item>
+        <item>@string/widget_numpad_8_string</item>
+        <item>@string/widget_numpad_9_string</item>
+        <item>@string/widget_numpad_0_string</item>
+        <item>@string/widget_numpad_clear_string</item>
+		<item>@string/widget_numpad_backspace_string</item>
+    </string-array>
+    
+    <string-array name="message_speed_dial_number_not_exist">
+        <item>@string/speed_dial_number_string</item>
+        <item>@string/doesnt_exist_string</item>
+    </string-array>
+
+</resources>

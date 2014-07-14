@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/name_linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="2dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_name_text_view_name"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/sdn_dialog_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phone_number_linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_linear_layout"
+        android:paddingLeft="2dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_number_text_view_name"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/sdn_dialog_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sdn_linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_number_linear_layout"
+        android:paddingTop="5dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
+
+        <EditText
+            android:id="@+id/sdn_dialog_speed_dial_number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_speed_dial_number_dialog"
+            android:inputType="number"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/enter_sdn_button_linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sdn_linear_layout"
+        android:paddingTop="5dp" >
+
+        <Button
+            android:id="@+id/sdn_dialog_ok_button"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ok_button_string"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/sdn_dialog_cancel_button"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel_button_string"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</RelativeLayout>

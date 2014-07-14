@@ -49,8 +49,8 @@ import com.apps.interestingapps.speeddial.common.DatabaseHelper;
 import com.apps.interestingapps.speeddial.common.Operation;
 import com.apps.interestingapps.speeddial.common.PhoneNumberDialogAdapter;
 import com.apps.interestingapps.speeddial.common.SpeedDialConstants;
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class SpeedDialActivity extends Activity {
 
@@ -162,10 +162,26 @@ public class SpeedDialActivity extends Activity {
 				}
 			});
 
+			/*
+			 * Android 4.0 device id: 64FFE02AABF389054771188E3CF39B63
+			 *
+			 * Sony Xperia X10 device id: 080A4A2357E9089FDAB344624A7181F5
+			 *
+			 * Nexus 4 - Varun's - device id: 7A107DF0AB377695D8973481767E5A76
+			 */
 			adview = (AdView) findViewById(R.id.adView);
-			AdRequest re = new AdRequest();
-			// re.setTesting(true);
-			adview.loadAd(re);
+
+			/*
+			 * TODO: Uncomment it while running tests. Comment this part while
+			 * creating APK for production
+			 */
+			// AdRequest adRequest = new
+			// AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+			// .addTestDevice("7A107DF0AB377695D8973481767E5A76")
+			// .build();
+
+			AdRequest adRequest = new AdRequest.Builder().build();
+			adview.loadAd(adRequest);
 
 			if (startedToSaveContact) {
 				String speedDialNumberToSave = intentStratingThisActivity
@@ -212,15 +228,23 @@ public class SpeedDialActivity extends Activity {
 	}
 
 	private void pickContact() {
-		Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri
-				.parse("content://contacts"));
+		Intent pickContactIntent = new Intent(Intent.ACTION_PICK,
+				ContactsContract.Contacts.CONTENT_URI);
+
 		/*
 		 * Show user only contacts w/ phone numbers
 		 */
 		pickContactIntent.setType(ContactsContract.Contacts.CONTENT_TYPE);
 		isPickContactCalled = true;
-		startActivityForResult(pickContactIntent,
-				SpeedDialConstants.PICK_CONTACT_REQUEST);
+		if (pickContactIntent.resolveActivity(getPackageManager()) != null) {
+			startActivityForResult(pickContactIntent,
+					SpeedDialConstants.PICK_CONTACT_REQUEST);
+		} else {
+			Toast.makeText(this,
+					"Sorry, no app to provide contacts list is currently available.",
+					Toast.LENGTH_LONG)
+					.show();
+		}
 	}
 
 	/**
@@ -275,7 +299,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Method to retrieve all the phone numbers from a selected contact
-	 * 
+	 *
 	 * @param selectedContactCursor
 	 * @return
 	 */
@@ -315,7 +339,7 @@ public class SpeedDialActivity extends Activity {
 	/**
 	 * A method to create a dialog to ask the use to select 1 number out of many
 	 * phone numbers a contact may have
-	 * 
+	 *
 	 * @param phoneNumbers
 	 * @return
 	 */
@@ -377,7 +401,7 @@ public class SpeedDialActivity extends Activity {
 	 * Save the selected number in database. Checks if the number is already
 	 * associated to a speed dial number, or the selected speed dial number
 	 * already has another phone number associated to it
-	 * 
+	 *
 	 * @param selectedPhoneNumberIndex
 	 *           The index representing the phone number that the use wants to
 	 *           set the current speed dial entry for
@@ -456,7 +480,7 @@ public class SpeedDialActivity extends Activity {
 	 * Performs a check whether the selected phone is associated to a speed dial
 	 * number or if the selected speed dial number has a phone number associated
 	 * to it
-	 * 
+	 *
 	 * @param selectedPhoneNumberIndex
 	 * @param speedDialNumber
 	 * @return true if the selected data satisfies the validity criteria
@@ -551,6 +575,7 @@ public class SpeedDialActivity extends Activity {
 	/**
 	 * Method to create a context menu when a list item pressed for long
 	 */
+	@Override
 	public void onCreateContextMenu(ContextMenu menu,
 			View v,
 			ContextMenuInfo menuInfo) {
@@ -597,7 +622,7 @@ public class SpeedDialActivity extends Activity {
 	/**
 	 * Creates a new dialog to ask the use to enter the speed dial number for the
 	 * selected phone number
-	 * 
+	 *
 	 * @param selectedPhoneNumberIndex
 	 */
 	private void
@@ -705,7 +730,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Class to handle the click event of Edit radio buttons
-	 * 
+	 *
 	 * @param view
 	 */
 	private class EditRadioButtonClickListener implements
@@ -757,7 +782,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Method to make a call to give phone number
-	 * 
+	 *
 	 * @param number
 	 * @param isSpeedDialNumber
 	 *           true if the number that is passed is a speed dial number and not
@@ -950,7 +975,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Method to delete a record from database and the contactsAdapter
-	 * 
+	 *
 	 * @param contactToDelete
 	 * @throws Exception
 	 */
@@ -976,7 +1001,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Method to add an entry to database and contactsAdapter
-	 * 
+	 *
 	 * @param name
 	 * @param phoneNumberIndex
 	 * @param speedDialNumber
@@ -1070,7 +1095,7 @@ public class SpeedDialActivity extends Activity {
 
 	/**
 	 * Show the rate dialog
-	 * 
+	 *
 	 * @param mContext
 	 * @param editor
 	 */

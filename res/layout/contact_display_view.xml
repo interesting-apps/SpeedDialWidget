@@ -46,15 +46,14 @@
         android:text="@string/empty_speed_dial_number_list"
         android:textColor="@color/WhiteSmoke" />
 
-    <com.google.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="a150ee6f61bf311"
-        ads:refreshInterval="60" />
+        ads:adUnitId="ca-app-pub-4531130906794046/6399106619" />
 
     <ListView
         android:id="@+id/contactList"

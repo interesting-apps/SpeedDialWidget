@@ -30,6 +30,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -71,6 +72,7 @@ public class SpeedDialActivity extends Activity {
 	private boolean startedToSaveContact = false;
 	private boolean anotherActivityStarted = false;
 	private boolean isPickContactCalled = false;
+	private final String TAG = "SpeedDialActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -177,11 +179,26 @@ public class SpeedDialActivity extends Activity {
 			 */
 			// AdRequest adRequest = new
 			// AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-			// .addTestDevice("7A107DF0AB377695D8973481767E5A76")
+			// .addTestDevice("080A4A2357E9089FDAB344624A7181F5")
 			// .build();
 
 			AdRequest adRequest = new AdRequest.Builder().build();
 			adview.loadAd(adRequest);
+
+			final View activityRootView = findViewById(R.id.activityRoot);
+			activityRootView.getViewTreeObserver()
+					.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+						public void onGlobalLayout() {
+							int heightDiff = activityRootView.getRootView()
+									.getHeight() - activityRootView.getHeight();
+							if (heightDiff > 100) { // if more than 100 pixels, its
+															// probably a keyboard...
+								adview.setVisibility(View.GONE);
+							} else {
+								adview.setVisibility(View.VISIBLE);
+							}
+						}
+					});
 
 			if (startedToSaveContact) {
 				String speedDialNumberToSave = intentStratingThisActivity
